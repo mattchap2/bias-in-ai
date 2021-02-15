@@ -1,0 +1,124 @@
+\documentclass[conference]{IEEEtran}
+% \IEEEoverridecommandlockouts
+% The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{listings}
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+\begin{document}
+
+\title{Bias in AI Scientific Report}
+
+\author{\IEEEauthorblockN{1\textsuperscript{st} Given Name Surname}
+\IEEEauthorblockA{\textit{dept. name of organization (of Aff.)} \\
+\textit{name of organization (of Aff.)}\\
+City, Country \\
+email address or ORCID}
+}
+
+\maketitle
+
+\begin{abstract}
+
+\end{abstract}
+
+\begin{IEEEkeywords}
+
+\end{IEEEkeywords}
+
+\section{Project proposal}
+
+What I'd like to do for my course project is to analyse the human-centric German-Credit dataset for assessing credit risk.
+
+The motivation for this project is to develop a fair machine learning ecosystem
+to detect, reduce, and eventually mitigate different types of bias that exist in the final outcome of the algorithm in various ways.
+
+The concrete tasks I plan to do are as follows:
+\begin{enumerate}
+    \item Perform "cleaning", binning, bucketing, and discrete-to-continuous feature transformations on the dataset.
+    \item Split the dataset into different demographic groups, by writing down the size of the groups, the average value for each (numeric) feature, the variance of each (numeric) feature, the mode for each categorical feature, and the three most frequent values for each categorical feature, each computed on the different demographic subgroups.
+    \item Observe any interesting differences between the different
+    subgroups’ statistics, and describe any bias observed and explain the reasons why this bias has happened from my point of view.
+    \item Naively split your dataset into training and testing sets by randomly sampling some of the data, for example, 70\% train and 30\% test.
+    \item Train your model and see how it generalises to the testing dataset. Explain my approach and findings
+    \item Subsample a new testing dataset in an unbiased way and representative of the task, for example, you may wish to ensure gender and age diversity
+    \item Retrain your model and see how it generalises to these
+    new testing conditions. 
+    \item Compare findings with the results in 3 and explain my approach.
+    \item If you have observed any sort of bias, please describe it and explain the reasons why this bias has happened from your point of view
+\end{enumerate}
+
+The final work product of these tasks will be \dots
+
+The particular context I'm thinking about is \dots
+
+The technologies I plan to use in my implementation are as follows: the Python programming language, packages. 
+
+\section{Project progress report}
+\subsection{Data analysis}
+These tables need fixing.
+\begin{center}
+    \begin{tabular}{ |c|c|c| } 
+        \hline
+        & Age & cell3 \\ 
+        \hline
+        size     & 1000 & cell \\ 
+        average  & 35.54 & cell \\ 
+        variance & cell8 & cell \\ 
+        \hline
+    \end{tabular}
+\end{center}
+
+\begin{center}
+    \begin{tabular}{ |c|c|c| } 
+        \hline
+                        & Sex   \\ 
+        \hline
+        size               & 1000  \\ 
+        mode               & 35.54 \\ 
+        most frequent      & cell8 \\ 
+        2nd-most frequent  & cell8 \\ 
+        3rd-most frequent  & cell8 \\ 
+        \hline
+    \end{tabular}
+\end{center}
+
+\subsection{Conventional implementation}
+At this stage of the project, I have a biased dataset, and implement a conventional ML algorithm.
+
+My chosen algorithm is \dots
+
+The justification for selecting this algorithm is \dots
+
+My approach is to split the dataset into training and testing sets by randomly sampling some of the data, with 70\% for training and 30\% for testing, followed by training the model on the training dataset, and then seeing how it generalises to the testing dataset. 
+
+My findings were \dots
+
+My next approach was to subsample a new testing dataset in an unbiased way, by ensuring gender and age diversity by doing \dots, followed by retraining the model on the training dataset, and then seeing how it generalises to the testing dataset with new conditions.
+
+My new findings were \dots, and compared to the previous results, they are \dots.
+
+I observed there to be bias in \dots and \dots. From my point of view, the reason why this bias has happened is because \dots.
+
+\subsection{Fair machine learning implementation}
+In this step, I implement one of the fair ML methods of mitigating bias. 
+
+The solutions that were provided in the suggested project paper \cite{Feldman2015ComputationalFP} are two methods of modifying data, called Combinatorial and Geometric repair. We choose only one algorithm to implement due to time constraints brought about by other academic commitments. 
+
+The proposed algorithm, combinatorial repair, is \dots
+
+We test the performance of our trained model for the minority groups. Compared with the performance of our model over the majority group, \dots
+
+We observe a reduction in algorithmic bias, which is \dots. We plot the results demonstrating this below:
+
+We do get roughly the same results as in the project paper. We justify the reasons by \dots
+
+\bibliographystyle{plain}
+\bibliography{references}
+\end{document}
