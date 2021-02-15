@@ -1,53 +1,69 @@
-\documentclass{article}
-
-\usepackage{opensans}
+\documentclass[conference]{IEEEtran}
+% \IEEEoverridecommandlockouts
+% The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
 \usepackage{graphicx}
-\usepackage[
-    backend=biber,
-    style=numeric,
-    citestyle=numeric
-]{biblatex}
-\usepackage{fontawesome}
-\usepackage[hidelinks]{hyperref}
+\usepackage{textcomp}
+\usepackage{xcolor}
 \usepackage{listings}
-
-\addbibresource{references.bib}
-
-\title{Bias in AI Essay}
-\author{Matthew Chapman}
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 
 \begin{document}
+
+\title{Bias in AI Essay
+}
+
+\author{\IEEEauthorblockN{1\textsuperscript{st} Given Name Surname}
+\IEEEauthorblockA{\textit{dept. name of organization (of Aff.)} \\
+\textit{name of organization (of Aff.)}\\
+City, Country \\
+email address or ORCID}
+}
+
 \maketitle
+
+\begin{abstract}
+This document is a model and instructions for \LaTeX.
+This and the IEEEtran.cls file define the components of your paper [title, text, heads, etc.]. *CRITICAL: Do Not Use Symbols, Special Characters, Footnotes, 
+or Math in Paper Title or Abstract.
+\end{abstract}
+
+\begin{IEEEkeywords}
+component, formatting, style, styling, insert
+\end{IEEEkeywords}
 
 \section{Introduction}
 This essay demonstrates my point of view on the overall subject of algorithmic bias. First, I discuss the justifications on the reasons that bias in AI-based solutions should be addressed. Second, I demonstrate various ways to measure the fairness of a dataset and algorithm. Third, I discuss different ways to mitigate algorithmic bias. Last of all, I discuss what I expect to see in the fair machine learning solutions in the future.
 
 \section{Justifications}
-One reason to address bias in AI-based solutions is to ensure that the decisions do not reflect discriminatory behavior toward certain groups or populations, as stated by Mehrabi et al. 2019 \autocite{DBLP:journals/corr/abs-1908-09635}. They justify this by highlighting the canonical example of the software COMPAS, which was found to more likely assign a higher risk score (of recommitting another crime) to African-American offenders than to Caucasians with the same profile.\footnote{https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing}  
+One reason to address bias in AI-based solutions is to ensure that the decisions do not reflect discriminatory behaviour toward certain groups or populations, as stated by Mehrabi et al. 2019 \cite{DBLP:journals/corr/abs-1908-09635}. They justify this by highlighting the canonical example of the software COMPAS, which was found to more likely assign a higher risk score (of recommitting another crime) to African-American offenders than to Caucasians with the same profile.\footnote{https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing} 
 
-Another reason that bias in AI-based solutions should be addressed is to avoid perpetuating any systemic discrimination, under a misleading veil of data-driven objectivity, as said by \autocite{d_Alessandro_2017}. To justify this, they point to the broader debate concerning disparate impact, which is discussed extensively by \autocite{10.2307/24758720}. They highlight “Redlining” (refusing opportunities to people base solely on their zip code) for loans as a classic example of disparate impact.
+Another reason that bias in AI-based solutions should be addressed is to avoid perpetuating any systemic discrimination, under a misleading veil of data-driven objectivity, as said by \cite{d_Alessandro_2017}. To justify this, they point to the broader debate concerning disparate impact, which is discussed extensively by \cite{10.2307/24758720}. They highlight “Redlining” (refusing opportunities to people base solely on their zip code) for loans as a classic example of disparate impact.
 
-\autocite{10.1145/1401890.1401959} echoes the sentiment of the authors in the previous paragraph, and tackles the problem of discrimination in data mining in a rule-based setting, by introducing the notion of discriminatory classification rules, as a criterion to identify the potential risks of discrimination.
+\cite{10.1145/1401890.1401959} echoes the sentiment of the authors in the previous paragraph, and tackles the problem of discrimination in data mining in a rule-based setting, by introducing the notion of discriminatory classification rules, as a criterion to identify the potential risks of discrimination.
 
 \section{Dataset fairness}
-One way to measure fairness in a dataset is to address Simpson's Paradox \autocite{10.2307/2284382}. This can be done by comparing the regression for the entire population, regressions for each subgroup, and the unbiased regression. An example arose in \autocite{Bickel398}, where it seemed like there was bias toward women in graduate school admissions, but at the same women also had an advantage over men, in some cases, when the data was separated and analysed over the departments.
+One way to measure fairness in a dataset is to address Simpson's Paradox \cite{10.2307/2284382}. This can be done by comparing the regression for the entire population, regressions for each subgroup, and the unbiased regression. An example arose in \cite{Bickel398}, where it seemed like there was bias toward women in graduate school admissions, but at the same women also had an advantage over men, in some cases, when the data was separated and analysed over the departments.
 
 A traditional statistical way to measure fairness in a dataset is selection bias. Selection bias can be measured by calculating the divergence of the probability distribution over the space of inputs in the training data against the true data distribution.
 
-Other measures of fairness in a dataset include historical bias and representation bias, as introduced by \autocite{DBLP:journals/corr/abs-1901-10002}. Historical bias can be measured by evaluating the representational harm (such as reinforcing a stereotype) to a particular identity group. Representation bias can be measured by calculating the percentage a minority group makes up of the true distribution. 
+Other measures of fairness in a dataset include historical bias and representation bias, as introduced by \cite{DBLP:journals/corr/abs-1901-10002}. Historical bias can be measured by evaluating the representational harm (such as reinforcing a stereotype) to a particular identity group. Representation bias can be measured by calculating the percentage a minority group makes up of the true distribution. 
 
 \section{Algorithm fairness}
-Mehrabi et al. 2019 \autocite{DBLP:journals/corr/abs-1908-09635} compiles some of the most widely used definitions of fairness which we can apply to measure an algorithm.
+Mehrabi et al. 2019 \cite{DBLP:journals/corr/abs-1908-09635} compiles some of the most widely used definitions of fairness which we can apply to measure an algorithm.
 
-One measure is Fairness Through Unawareness. That is, ``An algorithm is fair as long as any protected attributes A are not explicitly used in the decision-making process" \autocite{GrgicHlaca2016TheCF, NIPS2017_a486cd07}. Protected attributes are specified in the Fair Housing and Equal Credit Opportunity Acts (FHA and ECOA) \autocite{Chen_2019}, and include race, colour, national origin, religion, sex, and more.
+One measure is Fairness Through Unawareness. That is, ``An algorithm is fair as long as any protected attributes A are not explicitly used in the decision-making process" \cite{GrgicHlaca2016TheCF, NIPS2017_a486cd07}. Protected attributes are specified in the Fair Housing and Equal Credit Opportunity Acts (FHA and ECOA) \cite{Chen_2019}, and include race, colour, national origin, religion, sex, and more.
 
-Another measure is Demographic Parity. This states that the likelihood of a positive outcome \autocite{10.1145/3194770.3194776} should be the same regardless of whether the person is in the protected (e.g., female) group. In mathematical terms, ``\textit{A predictor $\hat{Y}$ satisfies demographic parity if $P(\hat{Y}|A=0) = P(\hat{Y}|A=1)$}'', where $A$ is a protected attribute and $\hat{Y}$ is a binary predictor.  
+Another measure is Demographic Parity. This states that the likelihood of a positive outcome \cite{10.1145/3194770.3194776} should be the same regardless of whether the person is in the protected (e.g., female) group. In mathematical terms, ``\textit{A predictor $\hat{Y}$ satisfies demographic parity if $P(\hat{Y}|A=0) = P(\hat{Y}|A=1)$}'', where $A$ is a protected attribute and $\hat{Y}$ is a binary predictor.  
 
 Closely related are \textit{Equalised Odds} and \textit{Equal Opportunity}. The equalised odds definition states that the protected and unprotected groups should have equal rates for true positives and false positives (i.e., ``$P(\hat{Y}|A=0, Y=y) = P(\hat{Y}|A=1, Y=y), y \in {0,1}$''). The equal opportunity definition states that the protected and unprotected groups should have equal true positive rates (i.e., $P(\hat{Y}|A=0, Y=1) = P(\hat{Y}|A=1, Y=1)$) \cite{DBLP:journals/corr/HardtPS16}.
 
-\autocite{d_Alessandro_2017} summarises the metrics for measuring disparate impact from \autocite{DBLP:journals/corr/Zliobaite15a}. The recommended measure is the ``Mean Difference'' divided by a normalisation constant. The mean difference can be modified to a ``Conditional Mean Difference'', to account for distributional differences between the protected populations and the overall population.
+\cite{d_Alessandro_2017} summarises the metrics for measuring disparate impact from \cite{DBLP:journals/corr/Zliobaite15a}. The recommended measure is the ``Mean Difference'' divided by a normalisation constant. The mean difference can be modified to a ``Conditional Mean Difference'', to account for distributional differences between the protected populations and the overall population.
 
-\autocite{10.1145/1401890.1401959} introduces (strong) $\alpha$-protection to measure the discriminatory power of a rule, which occur in approaches such as decision trees and rule-based classifiers. An example of a potentially discriminatory (PD) rule they give, in the context of the German credit dataset \autocite{Dua:2019}, is as follows: 
+\cite{10.1145/1401890.1401959} introduces (strong) $\alpha$-protection to measure the discriminatory power of a rule, which occur in approaches such as decision trees and rule-based classifiers. An example of a potentially discriminatory (PD) rule they give, in the context of the German credit dataset \cite{Dua:2019}, is as follows: 
 
 \begin{lstlisting}
     personal_status=female div/sep/mar 
@@ -58,17 +74,18 @@ Closely related are \textit{Equalised Odds} and \textit{Equal Opportunity}. The 
 This contains the potentially discriminatory attribute personal\_status.
 
 \section{Mitigations}
-Mehrabi et al. 2019 \autocite{DBLP:journals/corr/abs-1908-09635} compiles some ways to mitigate algorithmic bias.
+Mehrabi et al. 2019 \cite{DBLP:journals/corr/abs-1908-09635} compiles some ways to mitigate algorithmic bias.
 
 \cite{DBLP:journals/corr/abs-1801-04385, DBLP:journals/corr/abs-1805-03094} proposed methods to discover
 Simpson’s paradoxes in data automatically
 
 Authors try to satisfy equality of opportunity and equalized odds in \cite{DBLP:journals/corr/HardtPS16}
 
-Another way to mitigate algorithmic bias mentioned in \autocite{d_Alessandro_2017} is to introduce augmented cost functions during the model training phase. \autocite{article} and \autocite{DBLP:journals/corr/Zliobaite15} are said to both augment a standard log-likelihood loss function with a ‘fairness’ regularizer, which takes into account differences in how the learning algorithm classifies protected vs. non-protected classes.
+Another way to mitigate algorithmic bias mentioned in \cite{d_Alessandro_2017} is to introduce augmented cost functions during the model training phase. \cite{article} and \cite{DBLP:journals/corr/Zliobaite15} are said to both augment a standard log-likelihood loss function with a ‘fairness’ regularizer, which takes into account differences in how the learning algorithm classifies protected vs. non-protected classes.
 
 \section{Fairness in future}
-As mentioned by Mehrabi et al. 2019 \autocite{DBLP:journals/corr/abs-1908-09635}, researchers have begun introducing tools that can assess the amount of fairness in a tool or system. The example given is Aequitas \autocite{DBLP:journals/corr/abs-1811-05577}, which lets users test models for different population subgroups. I expect to see more of this in the fair machine learning solutions in the future.
+As mentioned by Mehrabi et al. 2019 \cite{DBLP:journals/corr/abs-1908-09635}, researchers have begun introducing tools that can assess the amount of fairness in a tool or system. The example given is Aequitas \cite{DBLP:journals/corr/abs-1811-05577}, which lets users test models for different population subgroups. I expect to see more of this in the fair machine learning solutions in the future.
 
-\printbibliography
+\bibliographystyle{plain}
+\bibliography{references}
 \end{document}
