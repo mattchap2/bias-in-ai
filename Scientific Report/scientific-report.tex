@@ -34,31 +34,42 @@ email address or ORCID}
 
 \section{Project proposal}
 
-What I'd like to do for my course project is to analyse the human-centric German-Credit dataset for assessing credit risk.
+What I'd like to do for my course project is to analyse the human-centric German-Credit dataset for assessing credit risk \cite{}.
 
-The motivation for this project is to develop a fair machine learning ecosystem
-to detect, reduce, and eventually mitigate different types of bias that exist in the final outcome of the algorithm in various ways.
+What I intend to implement is one of the two methods of modifying data that \cite{Feldman2015ComputationalFP} proposes, called Combinatorial
+and Geometric repair. 
+
+The motivation for this project is to replicate the paper's claim that the repair performs favourably in terms of training classifiers that are
+both accurate and unbiased.
+
+The reasons I believe that the implementation suits this submodule as bias in artificial intelligence is that it lets me develop a fair machine learning ecosystem
+to detect, reduce, and eventually mitigate different types of bias (such as the “80\% rule” of disparate impact) that exist in the final outcome of the algorithm in various ways
 
 The concrete tasks I plan to do are as follows:
 \begin{enumerate}
     \item Perform "cleaning", binning, bucketing, and discrete-to-continuous feature transformations on the dataset.
-    \item Split the dataset into different demographic groups, by writing down the size of the groups, the average value for each (numeric) feature, the variance of each (numeric) feature, the mode for each categorical feature, and the three most frequent values for each categorical feature, each computed on the different demographic subgroups.
+    \item Split the dataset into different demographic groups, and compute and report information for each feature for each group.
     \item Observe any interesting differences between the different
     subgroups’ statistics, and describe any bias observed and explain the reasons why this bias has happened from my point of view.
-    \item Naively split your dataset into training and testing sets by randomly sampling some of the data, for example, 70\% train and 30\% test.
-    \item Train your model and see how it generalises to the testing dataset. Explain my approach and findings
-    \item Subsample a new testing dataset in an unbiased way and representative of the task, for example, you may wish to ensure gender and age diversity
-    \item Retrain your model and see how it generalises to these
-    new testing conditions. 
-    \item Compare findings with the results in 3 and explain my approach.
-    \item If you have observed any sort of bias, please describe it and explain the reasons why this bias has happened from your point of view
+    \item Describe my chosen conventional algorithm to implement on the biased dataset, as well as describe the justification for selection.
+    \item Naively split the dataset into training and testing sets.
+    \item Train the model and see how it generalises to the testing dataset, as well as explain my approach and findings.
+    \item Subsample a new testing dataset in an unbiased way, then retrain the model and see how it generalises to these new testing conditions. 
+    \item Compare my findings with the previous results and explain my approach.
+    \item Describe any sort of bias I observed, and explain the reasons why this bias has happened from my point of view.
+    \item Implement one of Combinatorial or Geometric repair, and describe the algorithm.
+    \item Test the performance of the trained model for the minority groups, and compare it with the performance of the model over the majority group.
+    \item Describe any reduction in algorithmic bias I observe.
+    \item State whether I get roughly the same results as the project paper, and, if not, reconsider my code or justify the reasons.
+    \item Describe from my point of view any sort of reduction in accuracy I observe.
 \end{enumerate}
 
-The final work product of these tasks will be \dots
+The final work product of these tasks will be appropriate and proper plots and graphs that demonstrate any reduction in algorithmic bias and any sort of reduction in accuracy I observe after the fair machine learning implementation.
 
-The particular context I'm thinking about is \dots
+As I formulate this project, the particular context I'm thinking about is applying for credit loans.
 
-The technologies I plan to use in my implementation are as follows: the Python programming language, packages. 
+The technologies I plan to use in my implementation are as follows: the Python programming language, the Pandas package for data analysis, and the Scikit-learn package for the implementation of the AI algorithm.
+\newpage 
 
 \section{Project progress report}
 \subsection{Data analysis}
