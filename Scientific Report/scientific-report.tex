@@ -77,11 +77,11 @@ The technologies I plan to use in my implementation are as follows: the Python p
 \subsection{Data analysis}
 In terms of ``cleaning'', binning, bucketing, and discrete-to-continuous feature transformations I did on the dataset, I did only bucketing: I converted the column `Age' with integer values to the column `Age\_Group' with four categorical values. The categorical value (age group) and range of integers (age range), inclusive, that they correspond to are as follows: \textbf{Young,} 19-29; \textbf{Young Adults,} 30-40; \textbf{Senior,} 41-55; \textbf{Elder,} 55+.
 
-Then, we split the dataset into different demographic groups, by writing down the size of the groups, the average value for each (numeric) feature, the variance of each (numeric) feature, the mode for each categorical feature, and the three most frequent values for each categorical feature, each computed on the different demographic subgroups. The two different demographic groups are age group and sex, and their different demographic subgroups, respectively, are young, young adults, senior, or elder, and male or female. The different subgrouos' statistics are presented in Table \ref{table:1}.
+Then, we split the dataset into different demographic groups, by writing down the size of the groups, the average value for each (numeric) feature, the variance of each (numeric) feature, the mode for each categorical feature, and the three most frequent values for each categorical feature, each computed on the different demographic subgroups. The two different demographic groups are age group and sex, and their different demographic subgroups, respectively, are young, young adults, senior, or elder, and male or female. The different subgrouos' statistics are presented in Tables \ref{table:1}, \ref{table:2}, and \ref{table:3}.
 
 \begin{table}[h]
 \begin{center}
-\caption{Table of the size of each demographic group.}
+\caption{Table of the size of the groups.}
 \begin{tabularx}{0.49\textwidth} { |X|X|X|X|X|X|X| } 
     \hline
             & male & female & Young & Young Adults & Senior & Elder \\ 
@@ -113,25 +113,25 @@ Then, we split the dataset into different demographic groups, by writing down th
     & variance & 0.3 & 7261837.7 & 142.6 \\
     \hline
     \multirow{2}{4em}{Young Adults} 
-    & average \\ 
-    & variance  \\
+    & average & 2.0 & 3375.5 & 21.5\\ 
+    & variance & 0.4 & 7646336.1 & 139.2 \\
     \hline
     \multirow{2}{4em}{Senior} 
-    & average \\ 
-    & variance  \\
+    & average & 1.9 & 3366.4 & 20.2 \\ 
+    & variance & 0.4 & 7986564.4 & 146.1 \\
     \hline
     \multirow{2}{4em}{Elder} 
-    & average \\ 
-    & variance  \\
+    & average & 1.8 & 3430.4 & 20.5\\ 
+    & variance & 0.7 & 13329819.2 & 192.5\\
     \hline
 \end{tabular}
 \label{table:2}
 \end{center}
 \end{table}
 
-\begin{table}[h]
+\begin{table*}[h]
 \begin{center}
-\caption{Table of the three most frequent values for each categorical feature for the gender demographic groups.}
+\caption{Table of the three most frequent values for each categorical feature for the different demographic subgroups.}
 \begin{tabular}{ |c|c|c|c|c|c|c| } 
     \hline
     & & Housing & Saving accounts & Checking account & Purpose & Risk \\ 
@@ -151,11 +151,45 @@ Then, we split the dataset into different demographic groups, by writing down th
     & 2nd most frequent & rent (113) & moderate (42) & moderate (112) & car (102) & bad (137) \\
     & 3rd most frequent & free (10) & quite rich (19) & rich (24) & furniture/equipment (84) & - \\ 
     \hline
+    \multirow{3}{4em}{Young Adults} 
+    & mode              & own (278) & little (201) & moderate (100) & car (128) & good(264) \\ 
+    & 2nd most frequent & free (39) & moderate (41) & little (81) & radio/TV (93) & bad (91) \\
+    & 3rd most frequent & rent (38) & quite rich (24) & rich (18) & furniture/equipment (58) & - \\
+    \hline 
+    \multirow{3}{4em}{Senior} 
+    & mode              & own (143) & little (117) & little (57) & car (79)& good (150)\\
+    & 2nd most frequent & free (40) & moderate (16) & moderate (39) & radio/TV (51) & bad (53) \\
+    & 3rd most frequent & rent (20) & quite rich (15) & rich (15) & furniture/equipment (36) & -\\ 
+    \hline
+    \multirow{3}{4em}{Elder} 
+    & mode              & own (44) & little (43) & little (21) & car (28) & good (52) \\ 
+    & 2nd most frequent & free (19) & rich (5) & moderate (18) & radio/TV (19)& bad (19)\\
+    & 3rd most frequent & rent (8) & quite rich (5) & rich (6) & business (9) & - \\ 
+    \hline
 \end{tabular}
 \label{table:3}
 \end{center}
+\end{table*}
+
+The interesting differences between the different subgroups' statistics that I observe are as follows: there are more than twice as many males than females; the sizes of the `Young' and `Young Adults' subgroups are each larger than the `Senior' and `Elder' subgroups combined; and, `Young Adults' are the only subgroup where the mode of the `Checking account' feature is `moderate', and not `little'. 
+
+\begin{table}[h]
+\begin{center}
+\caption{Table of the percentage of each demographic subgroup where 'Risk' is 'bad'.}
+\begin{tabularx}{0.49\textwidth} { |X|X|X|X|X|X|X| } 
+    \hline
+            & male & female & Young & Young Adults & Senior & Elder \\ 
+        \hline
+        \%bad & 27.7 & 35.2 & 36.9 & 25.6 & 26.1 & 26.8 \\
+        \hline
+\end{tabularx}
+\label{table:4}
+\end{center}
 \end{table}
 
+I have observed bias in both the gender and age demographic groups: a greater proportion of females than males were assigned a 'bad' credit risk; and, a greater proportion of 19-29 year-olds (the 'Young' subgroup) were assigned a 'bad' credit risk compared to other age groups. This data is presented in Table \ref{table:4}. 
+
+From my point of view, the reasons why this happened are because there are fewer females than males in the data, and the size of the 'Young' subgroup is greater than any of the other age groups, so the data is not representative.
 
 \subsection{Conventional implementation}
 At this stage of the project, I have a biased dataset, and implement a conventional ML algorithm.
