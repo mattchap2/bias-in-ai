@@ -8,6 +8,8 @@
 \usepackage{textcomp}
 \usepackage{xcolor}
 \usepackage{listings}
+\usepackage{tabularx}
+\usepackage{multirow}
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 
@@ -73,32 +75,87 @@ The technologies I plan to use in my implementation are as follows: the Python p
 
 \section{Project progress report}
 \subsection{Data analysis}
-These tables need fixing.
-\begin{center}
-    \begin{tabular}{ |c|c|c| } 
-        \hline
-        & Age & cell3 \\ 
-        \hline
-        size     & 1000 & cell \\ 
-        average  & 35.54 & cell \\ 
-        variance & cell8 & cell \\ 
-        \hline
-    \end{tabular}
-\end{center}
+In terms of ``cleaning'', binning, bucketing, and discrete-to-continuous feature transformations I did on the dataset, I did only bucketing: I converted the column `Age' with integer values to the column `Age\_Group' with four categorical values. The categorical value (age group) and range of integers (age range), inclusive, that they correspond to are as follows: \textbf{Young,} 19-29; \textbf{Young Adults,} 30-40; \textbf{Senior,} 41-55; \textbf{Elder,} 55+.
 
+Then, we split the dataset into different demographic groups, by writing down the size of the groups, the average value for each (numeric) feature, the variance of each (numeric) feature, the mode for each categorical feature, and the three most frequent values for each categorical feature, each computed on the different demographic subgroups. The two different demographic groups are age group and sex, and their different demographic subgroups, respectively, are young, young adults, senior, or elder, and male or female. The different subgrouos' statistics are presented in Table \ref{table:1}.
+
+\begin{table}[h]
 \begin{center}
-    \begin{tabular}{ |c|c|c| } 
+\caption{Table of the size of each demographic group.}
+\begin{tabularx}{0.49\textwidth} { |X|X|X|X|X|X|X| } 
+    \hline
+            & male & female & Young & Young Adults & Senior & Elder \\ 
         \hline
-                        & Sex   \\ 
+        size & 690  & 310    & 371   & 355          & 203    & 71    \\
         \hline
-        size               & 1000  \\ 
-        mode               & 35.54 \\ 
-        most frequent      & cell8 \\ 
-        2nd-most frequent  & cell8 \\ 
-        3rd-most frequent  & cell8 \\ 
-        \hline
-    \end{tabular}
+\end{tabularx}
+\label{table:1}
 \end{center}
+\end{table}
+
+\begin{table}[h]
+\begin{center}
+\caption{Table of the average value and variance of each (numeric) feature for the different demographic subgroups.}
+\begin{tabular}{ |c|c|c|c|c| } 
+    \hline
+    & & Job   & Credit amount & Duration\\ 
+    \hline
+    \multirow{2}{4em}{male} 
+    & average & 1.9 & 3448.0 & 21.6 \\ 
+    & variance & 0.4 & 8412806.3 & 154.7 \\ 
+    \hline
+    \multirow{2}{4em}{female} 
+    & average & 1.8 & 2877.8 & 19.4 \\ 
+    & variance & 0.5 & 6776346.3 & 122.1 \\
+    \hline
+    \multirow{2}{4em}{Young} 
+    & average & 1.8 & 3089.0 & 20.8 \\ 
+    & variance & 0.3 & 7261837.7 & 142.6 \\
+    \hline
+    \multirow{2}{4em}{Young Adults} 
+    & average \\ 
+    & variance  \\
+    \hline
+    \multirow{2}{4em}{Senior} 
+    & average \\ 
+    & variance  \\
+    \hline
+    \multirow{2}{4em}{Elder} 
+    & average \\ 
+    & variance  \\
+    \hline
+\end{tabular}
+\label{table:2}
+\end{center}
+\end{table}
+
+\begin{table}[h]
+\begin{center}
+\caption{Table of the three most frequent values for each categorical feature for the gender demographic groups.}
+\begin{tabular}{ |c|c|c|c|c|c|c| } 
+    \hline
+    & & Housing & Saving accounts & Checking account & Purpose & Risk \\ 
+    \hline
+    \multirow{3}{4em}{male} 
+    & mode              & own (517) & little (409) & little (186) & car (243) & good (499)\\ 
+    & 2nd most frequent & free (89) & moderate (71) & moderate (183) & radio/TV (195) & bad (191)\\ 
+    & 3rd most frequent & rent (84) & quite rich (47) & rich (43) & furniture/equipment (107) & - \\ 
+    \hline
+    \multirow{3}{4em}{female} 
+    & mode              & own (196) & little (194) & little (88) & car (94) & good(201) \\ 
+    & 2nd most frequent & rent (95) & moderate (32) & moderate (86) & radio/TV (85) & bad (109) \\
+    & 3rd most frequent & free (19) & rich (19) & rich (20) & furniture/equipment (74) & - \\ 
+    \hline
+    \multirow{3}{4em}{Young} 
+    & mode              & own (248) & little (242) & little (115) & radio/TV (117) & good(234) \\ 
+    & 2nd most frequent & rent (113) & moderate (42) & moderate (112) & car (102) & bad (137) \\
+    & 3rd most frequent & free (10) & quite rich (19) & rich (24) & furniture/equipment (84) & - \\ 
+    \hline
+\end{tabular}
+\label{table:3}
+\end{center}
+\end{table}
+
 
 \subsection{Conventional implementation}
 At this stage of the project, I have a biased dataset, and implement a conventional ML algorithm.
