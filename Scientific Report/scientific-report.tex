@@ -192,17 +192,17 @@ I have observed bias in both the gender and age demographic groups: a greater pr
 From my point of view, the reasons why this happened are because there are fewer females than males in the data, and the size of the 'Young' subgroup is greater than any of the other age groups, so the data is not representative.
 
 \subsection{Conventional implementation}
-At this stage of the project, I have a biased dataset, and implement a conventional ML algorithm.
+At this stage of the project, I have a biased dataset. I implement a conventional ML algorithm that is widely used (and is potentially biased) to solve a classification problem.
 
-My chosen algorithm is \dots
+My chosen algorithm is the support-vector machine (SVM) \cite{Cortes1995}. An SVM is a discriminative classification algorithm which finds the line or curve (in two dimensions) or manifold (in multiple dimensions) that divides classes of data from each other with the maximum margin. In two dimensions, the margin is the width of the separating line or curve, which can be the perpendicular distance to the nearest data point when plotted on a graph.
 
-The justification for selecting this algorithm is \dots
+The justification for selecting this algorithm is that it is the same conventional ML model as used in \cite{Feldman2015ComputationalFP}.
 
-My approach is to split the dataset into training and testing sets by randomly sampling some of the data, with 70\% for training and 30\% for testing, followed by training the model on the training dataset, and then seeing how it generalises to the testing dataset. 
+My approach is to split the dataset into training and testing sets by randomly sampling some of the data, with $\frac{2}{3}$ for training and $\frac{1}{3}$ for testing, followed by training the model on the training dataset, and then seeing how it generalises to the testing dataset. 
 
 My findings were \dots
 
-My next approach was to subsample a new testing dataset in an unbiased way, by ensuring gender and age diversity by doing \dots, followed by retraining the model on the training dataset, and then seeing how it generalises to the testing dataset with new conditions.
+My next approach was to subsample a new testing dataset in an unbiased way (stratified sampling), by ensuring gender and age diversity by doing \dots, followed by retraining the model on the training dataset, and then seeing how it generalises to the testing dataset with new conditions.
 
 My new findings were \dots, and compared to the previous results, they are \dots.
 
