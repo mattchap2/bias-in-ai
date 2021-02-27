@@ -221,11 +221,18 @@ Compared to the previous results, these new results have worse accuracy scores a
 I observed there to be bias towards females. From my point of view, the reason why this bias has happened is because, in the first approach, sex contributed to how the target was classified.
 
 \subsection{Fair machine learning implementation}
-In this step, I implement one of the fair ML methods of mitigating bias. 
+In this step, I implement one of the fair ML methods of mitigating bias. I chose only one algorithm to implement: Geometric repair. The justification for this choice is that this seems the easier of the two solutions that were provided in the suggested project paper \cite{Feldman2015ComputationalFP}.
 
-The solutions that were provided in the suggested project paper \cite{Feldman2015ComputationalFP} are two methods of modifying data, called Combinatorial and Geometric repair. We choose only one algorithm to implement due to time constraints brought about by other academic commitments. 
-
-The proposed algorithm, combinatorial repair, is \dots
+The proposed algorithm, Geometric repair, is as follows:
+\begin{enumerate}
+    \item Given a biased dataset $D$, with unprotected columns (attributes) $Y$ and stratifying (protected) columns $S$, make all stratified groups (all possible combinations of protected attributes), and let these be the values of $S$.
+    \item Store the size of each stratified group; if a group has size 0, ignore it.
+    \item Pick a number of quantiles, with the maximum number equal to the size of the smallest stratified group, so that there will be at least one entry per quantile. 
+    \item For each $Y$ column with orderable values, over its unique values, for each stratified group, find the median value at the $1^{st}$ quantile.
+    \item For each $Y$ column, find the median value of the median values, preferring the smaller item in the case of even-length lists, and call this the target value for all values of the column in the $1^{st}$ quantile of each stratified group.
+    \item For each $Y$ column, for each original unique value in the column, update the original value to the repair value, $$rv = ((1 - \lambda) * original) + (\lambda * target).$$
+    \item Proceed similarly for each remaining quantile.     
+\end{enumerate}
 
 We test the performance of our trained model for the minority groups. Compared with the performance of our model over the majority group, \dots
 
