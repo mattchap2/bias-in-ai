@@ -230,7 +230,7 @@ The proposed algorithm, Geometric repair, is as follows:
     \item Pick a number of quantiles, with the maximum number equal to the size of the smallest stratified group, so that there will be at least one entry per quantile. 
     \item For each $Y$ column with orderable values, over its unique values, for each stratified group, find the median value at the $1^{st}$ quantile.
     \item For each $Y$ column, find the median value of the median values, preferring the smaller item in the case of even-length lists, and call this the target value for all values of the column in the $1^{st}$ quantile of each stratified group.
-    \item For each $Y$ column, for each original unique value in the column, update the original value to the repair value, $$rv = ((1 - \lambda) * original) + (\lambda * target).$$
+    \item For each $Y$ column, for each original value in the $1^{st}$ quantile, update the original value to the repair value, $$rv = ((1 - \lambda) * original) + (\lambda * target).$$
     \item Proceed similarly for each remaining quantile.     
 \end{enumerate}
 
