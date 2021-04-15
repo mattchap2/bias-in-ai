@@ -26,13 +26,11 @@ email address or ORCID}
 \maketitle
 
 \begin{abstract}
-This document is a model and instructions for \LaTeX.
-This and the IEEEtran.cls file define the components of your paper [title, text, heads, etc.]. *CRITICAL: Do Not Use Symbols, Special Characters, Footnotes, 
-or Math in Paper Title or Abstract.
+
 \end{abstract}
 
 \begin{IEEEkeywords}
-component, formatting, style, styling, insert
+
 \end{IEEEkeywords}
 
 \section{Introduction}
@@ -47,7 +45,7 @@ Another reason that bias in AI-based solutions should be addressed is to avoid p
 
 \section{Ways to measure the fairness of a dataset and algorithm}
 \subsection{Ways to measure the fairness of a dataset}
-One way to measure fairness in a dataset is to address Simpson's Paradox \cite{10.2307/2284382}. This can be done by comparing the regression for the entire population, regressions for each subgroup, and the unbiased regression. An example arose in \cite{Bickel398}, where it seemed like there was bias toward women in graduate school admissions, but at the same women also had an advantage over men, in some cases, when the data was separated and analysed over the departments.
+One way to measure fairness in a dataset is to address Simpson's Paradox \cite{10.2307/2284382}. This can be done by comparing the regression for the entire population, regressions for each subgroup, and the unbiased regression. An example arose in \cite{Bickel398}, where it seemed like there was bias toward women in graduate school admissions, but, at the same time, women also had an advantage over men in some cases, such as when the data was separated and analysed over the departments.
 
 A traditional statistical way to measure fairness in a dataset is selection bias. Selection bias can be measured by calculating the divergence of the probability distribution over the space of inputs in the training data against the true data distribution.
 
@@ -58,7 +56,7 @@ Mehrabi et al. 2019 \cite{DBLP:journals/corr/abs-1908-09635} compiles some of th
 
 One measure is Fairness Through Unawareness. That is, ``An algorithm is fair as long as any protected attributes A are not explicitly used in the decision-making process" \cite{GrgicHlaca2016TheCF, NIPS2017_a486cd07}. Protected attributes are specified in the Fair Housing and Equal Credit Opportunity Acts (FHA and ECOA) \cite{Chen_2019}, and include race, colour, national origin, religion, sex, and more.
 
-Another measure is Demographic Parity. This states that the likelihood of a positive outcome \cite{10.1145/3194770.3194776} should be the same regardless of whether the person is in the protected (e.g., female) group. In mathematical terms, ``\textit{A predictor $\hat{Y}$ satisfies demographic parity if $P(\hat{Y}|A=0) = P(\hat{Y}|A=1)$}'', where $A$ is a protected attribute and $\hat{Y}$ is a binary predictor.  
+Another measure is Demographic Parity. This states that the likelihood of a positive outcome \cite{10.1145/3194770.3194776} should be the same regardless of whether the person is in the protected group (e.g., female). In mathematical terms, ``\textit{A predictor $\hat{Y}$ satisfies demographic parity if $P(\hat{Y}|A=0) = P(\hat{Y}|A=1)$}'', where $A$ is a protected attribute and $\hat{Y}$ is a binary predictor.  
 
 Closely related are \textit{Equalised Odds} and \textit{Equal Opportunity}. The equalised odds definition states that the protected and unprotected groups should have equal rates for true positives and false positives (i.e., ``$P(\hat{Y}|A=0, Y=y) = P(\hat{Y}|A=1, Y=y), y \in {0,1}$''). The equal opportunity definition states that the protected and unprotected groups should have equal true positive rates (i.e., $P(\hat{Y}|A=0, Y=1) = P(\hat{Y}|A=1, Y=1)$) \cite{DBLP:journals/corr/HardtPS16}.
 
@@ -75,17 +73,31 @@ Closely related are \textit{Equalised Odds} and \textit{Equal Opportunity}. The 
 This contains the potentially discriminatory attribute personal\_status.
 
 \section{Ways to mitigate algorithmic bias}
-Mehrabi et al. 2019 \cite{DBLP:journals/corr/abs-1908-09635} compiles some ways to mitigate algorithmic bias.
+Mehrabi et al. 2019 \cite{DBLP:journals/corr/abs-1908-09635} also compiles some ways to mitigate algorithmic bias.
 
 \cite{DBLP:journals/corr/abs-1801-04385, DBLP:journals/corr/abs-1805-03094} proposed methods to discover
-Simpson’s paradoxes in data automatically
+Simpson’s paradoxes in data automatically.
 
-Authors try to satisfy equality of opportunity and equalized odds in \cite{DBLP:journals/corr/HardtPS16}
+Authors try to satisfy equality of opportunity and equalized odds in \cite{DBLP:journals/corr/HardtPS16}.
 
 Another way to mitigate algorithmic bias mentioned in \cite{d_Alessandro_2017} is to introduce augmented cost functions during the model training phase. \cite{article} and \cite{DBLP:journals/corr/Zliobaite15} are said to both augment a standard log-likelihood loss function with a ‘fairness’ regularizer, which takes into account differences in how the learning algorithm classifies protected vs. non-protected classes.
 
+We can mitigate algorithmic bias by enforcing fariness criteria:
+\begin{itemize}
+    \item Independence: classifier is independent of A
+    \item Separation: Classifier is independent of A conditional on Y
+    \item Sufficiency: Y independent of A conditional on classifier
+\end{itemize}
+
+Relaxation constraints has limitations (see lecture 5).
+
 \section{What we expect to see in the fair machine learning solutions in the future}
 As mentioned by Mehrabi et al. 2019 \cite{DBLP:journals/corr/abs-1908-09635}, researchers have begun introducing tools that can assess the amount of fairness in a tool or system. The example given is Aequitas \cite{DBLP:journals/corr/abs-1811-05577}, which lets users test models for different population subgroups. I expect to see more of this in the fair machine learning solutions in the future.
+
+\begin{itemize}
+    \item AI fairness 360 by IBM
+    \item What-if-tool by Google
+\end{itemize}
 
 \bibliographystyle{plain}
 \bibliography{references}
