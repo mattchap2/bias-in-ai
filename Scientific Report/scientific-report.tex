@@ -36,46 +36,34 @@ Artificial intelligence, bias, machine learning
 
 \section{Project proposal}
 
-What I'd like to do for my course project is to analyse the human-centric German-Credit dataset for assessing credit risk \cite{}.
+In this course project, we will be analysing the human-centric German-Credit dataset for assessing credit risk, which is one of the suggested projects\footnote{kaggle.com/janiobachmann/german-credit-analysis-a-risk-perspective}. We intend to implement one of the two methods of modifying data, called Combinatorial repair
+and Geometric repair, proposed by \cite{Feldman2015ComputationalFP}. The motivation for this project is to assess the paper's claim that the repair performs favourably in terms of training classifiers that are both accurate and unbiased.
 
-What I intend to implement is one of the two methods of modifying data that \cite{Feldman2015ComputationalFP} proposes, called Combinatorial
-and Geometric repair. 
-
-The motivation for this project is to replicate the paper's claim that the repair performs favourably in terms of training classifiers that are
-both accurate and unbiased.
-
-The reasons I believe that the implementation suits this submodule as bias in artificial intelligence is that it lets me develop a fair machine learning ecosystem
-to detect, reduce, and eventually mitigate different types of bias (such as the “80\% rule” of disparate impact) that exist in the final outcome of the algorithm in various ways
-
-The concrete tasks I plan to do are as follows:
+We believe the intention suits this submodule as bias in artificial intelligence because we will be developing a fair machine learning ecosystem
+to detect, reduce, and eventually mitigate different types of bias that may exist in the final outcome of the algorithm in various ways. The concrete tasks we plan to do are as follows:
 \begin{enumerate}
-    \item Perform "cleaning", binning, bucketing, and discrete-to-continuous feature transformations on the dataset.
-    \item Split the dataset into different demographic groups, and compute and report information for each feature for each group.
-    \item Observe any interesting differences between the different
-    subgroups’ statistics, and describe any bias observed and explain the reasons why this bias has happened from my point of view.
-    \item Describe my chosen conventional algorithm to implement on the biased dataset, as well as describe the justification for selection.
-    \item Naively split the dataset into training and testing sets.
-    \item Train the model and see how it generalises to the testing dataset, as well as explain my approach and findings.
-    \item Subsample a new testing dataset in an unbiased way, then retrain the model and see how it generalises to these new testing conditions. 
-    \item Compare my findings with the previous results and explain my approach.
-    \item Describe any sort of bias I observed, and explain the reasons why this bias has happened from my point of view.
-    \item Implement one of Combinatorial or Geometric repair, and describe the algorithm.
-    \item Test the performance of the trained model for the minority groups, and compare it with the performance of the model over the majority group.
-    \item Describe any reduction in algorithmic bias I observe.
-    \item State whether I get roughly the same results as the project paper, and, if not, reconsider my code or justify the reasons.
-    \item Describe from my point of view any sort of reduction in accuracy I observe.
+    \item perform any `cleaning', binning, bucketing, or discrete-to-continuous feature transformations on the dataset;
+    \item split the dataset into different demographic groups, and compute and report information for each feature for each demographic subgroup;
+    \item observe any interesting differences between the different subgroups’ statistics, and describe any bias observed and explain the reasons why this bias has happened from our point of view;
+    \item choose a conventional algorithm to implement on the biased dataset, and describe the algorithm and the justification for selection;
+    \item naively split the dataset into training and testing sets, then train the model and see how it generalises to the testing dataset, as well as explain our approach and findings;
+    \item subsample a new testing dataset in an unbiased way, then retrain the model and see how it generalises to these new testing conditions; 
+    \item compare our findings with the previous results and explain our approach;
+    \item describe any sort of bias we observed, and explain the reasons why this bias has happened from our point of view;
+    \item implement one of Combinatorial repair or Geometric repair, and describe the algorithm;
+    \item test the performance of the trained model for the minority groups, compare it with the performance of the model over the majority group, and describe any reduction in algorithmic bias we observe;
+    \item state whether we get roughly the same results as the project paper, and, if not, reconsider our code or justify the reasons; and,
+    \item describe from our point of view any sort of reduction in accuracy we observe.
 \end{enumerate}
+The final work product of these tasks will be appropriate and proper plots and graphs that demonstrate any reduction in algorithmic bias and any sort of reduction in accuracy we observe after the fair machine learning implementation.
 
-The final work product of these tasks will be appropriate and proper plots and graphs that demonstrate any reduction in algorithmic bias and any sort of reduction in accuracy I observe after the fair machine learning implementation.
+As we formulate this project, the particular context we are thinking about is applying for credit loans. The dataset might exhibit a greater proportion of good risk for applicants from specific demographic groups (such as age groups) over another. Biases such as this, termed \emph{disparate impact}, should be avoided by classifiers, as it is unethical and prohibited by law \cite{10.2307/24758720}.  
 
-As I formulate this project, the particular context I'm thinking about is applying for credit loans.
-
-The technologies I plan to use in my implementation are as follows: the Python programming language, the Pandas package for data analysis, and the Scikit-learn package for the implementation of the AI algorithm.
-\newpage 
+The technologies we plan to use in our implementation are the Python programming language, the Pandas package for data analysis, and the Scikit-learn package for the implementation of the AI algorithm.
 
 \section{Project progress report}
 \subsection{Data analysis}
-In terms of ``cleaning'', binning, bucketing, and discrete-to-continuous feature transformations I did on the dataset, I did only bucketing: I converted the column `Age' with integer values to the column `Age\_Group' with four categorical values. The categorical value (age group) and range of integers (age range), inclusive, that they correspond to are as follows: \textbf{Young,} 19-29; \textbf{Young Adults,} 30-40; \textbf{Senior,} 41-55; \textbf{Elder,} 55+.
+In terms of `cleaning', binning, bucketing, and discrete-to-continuous feature transformations I did on the dataset, I did only bucketing: I converted the column `Age' with integer values to the column `Age\_Group' with four categorical values. The categorical value (age group) and range of integers (age range), inclusive, that they correspond to are as follows: \textbf{Young,} 19-29; \textbf{Young Adults,} 30-40; \textbf{Senior,} 41-55; \textbf{Elder,} 55+.
 
 Then, we split the dataset into different demographic groups, by writing down the size of the groups, the average value for each (numeric) feature, the variance of each (numeric) feature, the mode for each categorical feature, and the three most frequent values for each categorical feature, each computed on the different demographic subgroups. The two different demographic groups are age group and sex, and their different demographic subgroups, respectively, are young, young adults, senior, or elder, and male or female. The different subgrouos' statistics are presented in Tables \ref{table:1}, \ref{table:2}, and \ref{table:3}.
 
@@ -189,16 +177,16 @@ The interesting differences between the different subgroups' statistics that I o
 
 I have observed bias in both the gender and age demographic groups: a greater proportion of females than males were assigned a 'bad' credit risk; and, a greater proportion of 19-29 year-olds (the `Young' subgroup) were assigned a `bad' credit risk compared to other age groups. This data is presented in Table \ref{table:4}. 
 
-From my point of view, the reasons why this happened are because there are fewer females than males in the data, and the size of the `Young' subgroup is greater than any of the other age groups, so the data is not representative.
+From our point of view, the reasons why this happened are because there are fewer females than males in the data, and the size of the `Young' subgroup is greater than any of the other age groups, so the data is not representative.
 
 \subsection{Conventional implementation}
 At this stage of the project, I have a biased dataset. I implement a conventional ML algorithm that is widely used (and is potentially biased) to solve a classification problem --- whether to assign someone a `good' or `bad' credit risk.
 
-My chosen algorithm is the support-vector machine (SVM) \cite{Cortes1995}. An SVM is a discriminative classification algorithm which finds the line or curve (in two dimensions) or manifold (in multiple dimensions) that divides classes of data from each other with the maximum margin. In two dimensions, the margin is the width of the separating line or curve, which can be the perpendicular distance to the nearest data point when plotted on a graph.
+our chosen algorithm is the support-vector machine (SVM) \cite{Cortes1995}. An SVM is a discriminative classification algorithm which finds the line or curve (in two dimensions) or manifold (in multiple dimensions) that divides classes of data from each other with the maximum margin. In two dimensions, the margin is the width of the separating line or curve, which can be the perpendicular distance to the nearest data point when plotted on a graph.
 
 The justification for selecting this algorithm is that it is the same conventional ML model as used in the suggested paper \cite{Feldman2015ComputationalFP}.
 
-My first approach was as follows:
+our first approach was as follows:
 \begin{enumerate}
     \item Naively split the dataset into training and testing sets by randomly sampling some of the data, with $\frac{2}{3}$ for training and $\frac{1}{3}$ for testing (the same ratio used in \cite{Feldman2015ComputationalFP}).
     \item Standardise numeric features by subtracting the mean and scaling to unit variance by dividing by the standard deviation.
@@ -210,15 +198,15 @@ My first approach was as follows:
     \item See how the model generalises to the testing dataset, by calculating an accuracy score. 
 \end{enumerate}
 
-My findings were as follows: the best parameter combination for the classifier was a regularisation parameter ($C$) of value 0.95 and a polynomial kernel function of degree 4; the mean accuracy on the training data was 81.1\%; the mean accuracy after cross-validation was 73.9\%; and, the accuracy on the testing data was 72.5\%.   
+our findings were as follows: the best parameter combination for the classifier was a regularisation parameter ($C$) of value 0.95 and a polynomial kernel function of degree 4; the mean accuracy on the training data was 81.1\%; the mean accuracy after cross-validation was 73.9\%; and, the accuracy on the testing data was 72.5\%.   
 
-My next approach was to subsample a new testing dataset in an unbiased way, followed by retraining the model on the training dataset, and then seeing how it generalises to the testing dataset with new conditions. I chose to ensure gender diversity by resampling the data so that the ratio of males to females was 1 to 1. I did this by randomly sampling a subset of the male data, with size equal to the female data, and then discarding the remaining male data. When splitting the dataset into training and testing sets, I applied stratified sampling to preserve the percentage of samples for the male and female classes (i.e. 1 to 1).
+our next approach was to subsample a new testing dataset in an unbiased way, followed by retraining the model on the training dataset, and then seeing how it generalises to the testing dataset with new conditions. I chose to ensure gender diversity by resampling the data so that the ratio of males to females was 1 to 1. I did this by randomly sampling a subset of the male data, with size equal to the female data, and then discarding the remaining male data. When splitting the dataset into training and testing sets, I applied stratified sampling to preserve the percentage of samples for the male and female classes (i.e. 1 to 1).
 
-My new findings were as follows: the best parameter combination for the classifier was a $C$ of value 1 and a polynomial kernel function of degree 3; the mean accuracy on the training data was 78.5\%; the mean accuracy after cross-validation was 68.8\%; and, the accuracy on the testing data was 67.6\%
+our new findings were as follows: the best parameter combination for the classifier was a $C$ of value 1 and a polynomial kernel function of degree 3; the mean accuracy on the training data was 78.5\%; the mean accuracy after cross-validation was 68.8\%; and, the accuracy on the testing data was 67.6\%
 
 Compared to the previous results, these new results have worse accuracy scores at each stage.
 
-I observed there to be bias towards females. From my point of view, the reason why this bias has happened is because, in the first approach, sex contributed to how the target was classified.
+I observed there to be bias towards females. From our point of view, the reason why this bias has happened is because, in the first approach, sex contributed to how the target was classified.
 
 \subsection{Fair machine learning implementation}
 In this step, I implement one of the fair ML methods of mitigating bias. I chose only one algorithm to implement: Geometric repair. The justification for this choice is that this seems the easier of the two solutions that were provided in the suggested project paper \cite{Feldman2015ComputationalFP}.
