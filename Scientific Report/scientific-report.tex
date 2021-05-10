@@ -10,6 +10,7 @@
 \usepackage{listings}
 \usepackage{tabularx}
 \usepackage{multirow}
+\graphicspath{ {./images/} }
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 
@@ -17,22 +18,22 @@
 
 \title{Bias in AI Scientific Report}
 
-\author{\IEEEauthorblockN{Anonymous Author}
-\IEEEauthorblockA{\textit{Department of Computer Science} \\
-\textit{Durham University}\\
-Durham, United Kingdom \\
-}
-}
+% \author{\IEEEauthorblockN{Anonymous Author}
+% \IEEEauthorblockA{\textit{Department of Computer Science} \\
+% \textit{Durham University}\\
+% Durham, United Kingdom \\
+% }
+% }
 
 \maketitle
 
-\begin{abstract}
+% \begin{abstract}
 
-\end{abstract}
+% \end{abstract}
 
-\begin{IEEEkeywords}
-Artificial intelligence, bias, machine learning
-\end{IEEEkeywords}
+% \begin{IEEEkeywords}
+% Artificial intelligence, bias, machine learning
+% \end{IEEEkeywords}
 
 \section{Project proposal}
 
@@ -42,7 +43,7 @@ and Geometric repair, proposed by \cite{Feldman2015ComputationalFP}. The motivat
 We believe the intention suits this submodule as bias in artificial intelligence because we will be developing a fair machine learning ecosystem
 to detect, reduce, and eventually mitigate different types of bias that may exist in the final outcome of the algorithm in various ways. The concrete tasks we plan to do are as follows:
 \begin{enumerate}
-    \item perform any `cleaning', binning, bucketing, or discrete-to-continuous feature transformations on the dataset;
+    \item perform any `cleaning', binning, or discrete-to-continuous feature transformations on the dataset;
     \item split the dataset into different demographic groups, and compute and report information for each feature for each demographic subgroup;
     \item observe any interesting differences between the different subgroups’ statistics, and describe any bias observed and explain the reasons why this bias has happened from our point of view;
     \item choose a conventional algorithm to implement on the biased dataset, and describe the algorithm and the justification for selection;
@@ -51,7 +52,7 @@ to detect, reduce, and eventually mitigate different types of bias that may exis
     \item compare our findings with the previous results and explain our approach;
     \item describe any sort of bias we observed, and explain the reasons why this bias has happened from our point of view;
     \item implement one of Combinatorial repair or Geometric repair, and describe the algorithm;
-    \item test the performance of the trained model for the minority groups, compare it with the performance of the model over the majority group, and describe any reduction in algorithmic bias we observe;
+    \item test the performance of the trained model for the repaired datasets, compare it with the performance of the model over the unrepaired dataset, and describe any reduction in algorithmic bias we observe;
     \item state whether we get roughly the same results as the project paper, and, if not, reconsider our code or justify the reasons; and,
     \item describe from our point of view any sort of reduction in accuracy we observe.
 \end{enumerate}
@@ -59,31 +60,31 @@ The final work product of these tasks will be appropriate and proper plots and g
 
 As we formulate this project, the particular context we are thinking about is applying for credit loans. The dataset might exhibit a greater proportion of good risk for applicants from specific demographic groups (such as age groups) over another. Biases such as this, termed \emph{disparate impact}, should be avoided by classifiers, as it is unethical and prohibited by law \cite{10.2307/24758720}.  
 
-The technologies we plan to use in our implementation are the Python programming language, the Pandas package for data analysis, and the Scikit-learn package for the implementation of the AI algorithm.
+The technologies we plan to use in our implementation are the Python programming language, the Pandas package for data analysis, and the Scikit-learn package for the implementation of the artificial intelligence (AI) algorithm.
 
 \section{Project progress report}
 \subsection{Data analysis}
-In terms of `cleaning', binning, bucketing, and discrete-to-continuous feature transformations I did on the dataset, I did only bucketing: I converted the column `Age' with integer values to the column `Age\_Group' with four categorical values. The categorical value (age group) and range of integers (age range), inclusive, that they correspond to are as follows: \textbf{Young,} 19-29; \textbf{Young Adults,} 30-40; \textbf{Senior,} 41-55; \textbf{Elder,} 55+.
+Out of `cleaning', binning, or discrete-to-continuous feature transformations we did on the dataset, we did `cleaning' and binning. We did `cleaning' by dropping the \emph{Checking account} and \emph{Saving accounts} features because they had instances with missing values. And, we did binning by replacing the \emph{Age} feature, which has integer values, with the \emph{Age\_Group} feature, which has categorical values. The four categorical values of \emph{Age\_Group} and the range of integer values, inclusive, of \emph{Age} that they correspond to are as follows: \textit{Young}, 19-29; \textit{Young Adults}, 30-40; \textit{Senior}, 41-55; \textit{Elder}, 55+.
 
-Then, we split the dataset into different demographic groups, by writing down the size of the groups, the average value for each (numeric) feature, the variance of each (numeric) feature, the mode for each categorical feature, and the three most frequent values for each categorical feature, each computed on the different demographic subgroups. The two different demographic groups are age group and sex, and their different demographic subgroups, respectively, are young, young adults, senior, or elder, and male or female. The different subgrouos' statistics are presented in Tables \ref{table:1}, \ref{table:2}, and \ref{table:3}.
+Then, we split the dataset into different demographic groups by writing down the size of the groups, the average value for each numeric feature, the variance of each numeric feature, the mode for each categorical feature, and the three most frequent values for each categorical feature, each computed on the different demographic subgroups. The two different demographic groups are \emph{Age\_Group} and \emph{Sex}, and their different demographic subgroups, respectively, are \textit{Young}, \textit{Young Adults}, \textit{Senior}, or \textit{Elder}, and \emph{male} or \emph{female}. The different subgroups' statistics are presented in Tables \ref{table:1}, \ref{table:2}, and \ref{table:3}.
 
-\begin{table}[h]
+\begin{table}[ht]
 \begin{center}
 \caption{Table of the size of each demographic subgroup.}
 \begin{tabularx}{0.49\textwidth} { |X|X|X|X|X|X|X| } 
     \hline
             & male & female & Young & Young Adults & Senior & Elder \\ 
         \hline
-        size & 690  & 310    & 371   & 355          & 203    & 71    \\
+        Size & 690  & 310    & 371   & 355          & 203    & 71    \\
         \hline
 \end{tabularx}
 \label{table:1}
 \end{center}
 \end{table}
 
-\begin{table}[h]
+\begin{table}[ht]
 \begin{center}
-\caption{Table of the average value and variance of each (numeric) feature for the different demographic subgroups.}
+\caption{Table of the average value and variance of each numeric feature for each demographic subgroup.}
 \begin{tabular}{ |c|c|c|c|c| } 
     \hline
     & & Job   & Credit amount & Duration\\ 
@@ -117,116 +118,168 @@ Then, we split the dataset into different demographic groups, by writing down th
 \end{center}
 \end{table}
 
-\begin{table*}[h]
-\begin{center}
-\caption{Table of the three most frequent values for each categorical feature for the different demographic subgroups.}
-\begin{tabular}{ |c|c|c|c|c|c|c| } 
-    \hline
-    & & Housing & Saving accounts & Checking account & Purpose & Risk \\ 
-    \hline
-    \multirow{3}{4em}{male} 
-    & mode              & own (517) & little (409) & little (186) & car (243) & good (499)\\ 
-    & 2nd most frequent & free (89) & moderate (71) & moderate (183) & radio/TV (195) & bad (191)\\ 
-    & 3rd most frequent & rent (84) & quite rich (47) & rich (43) & furniture/equipment (107) & - \\ 
-    \hline
-    \multirow{3}{4em}{female} 
-    & mode              & own (196) & little (194) & little (88) & car (94) & good(201) \\ 
-    & 2nd most frequent & rent (95) & moderate (32) & moderate (86) & radio/TV (85) & bad (109) \\
-    & 3rd most frequent & free (19) & rich (19) & rich (20) & furniture/equipment (74) & - \\ 
-    \hline
-    \multirow{3}{4em}{Young} 
-    & mode              & own (248) & little (242) & little (115) & radio/TV (117) & good(234) \\ 
-    & 2nd most frequent & rent (113) & moderate (42) & moderate (112) & car (102) & bad (137) \\
-    & 3rd most frequent & free (10) & quite rich (19) & rich (24) & furniture/equipment (84) & - \\ 
-    \hline
-    \multirow{3}{4em}{Young Adults} 
-    & mode              & own (278) & little (201) & moderate (100) & car (128) & good(264) \\ 
-    & 2nd most frequent & free (39) & moderate (41) & little (81) & radio/TV (93) & bad (91) \\
-    & 3rd most frequent & rent (38) & quite rich (24) & rich (18) & furniture/equipment (58) & - \\
-    \hline 
-    \multirow{3}{4em}{Senior} 
-    & mode              & own (143) & little (117) & little (57) & car (79)& good (150)\\
-    & 2nd most frequent & free (40) & moderate (16) & moderate (39) & radio/TV (51) & bad (53) \\
-    & 3rd most frequent & rent (20) & quite rich (15) & rich (15) & furniture/equipment (36) & -\\ 
-    \hline
-    \multirow{3}{4em}{Elder} 
-    & mode              & own (44) & little (43) & little (21) & car (28) & good (52) \\ 
-    & 2nd most frequent & free (19) & rich (5) & moderate (18) & radio/TV (19)& bad (19)\\
-    & 3rd most frequent & rent (8) & quite rich (5) & rich (6) & business (9) & - \\ 
-    \hline
-\end{tabular}
-\label{table:3}
-\end{center}
-\end{table*}
+% \begin{table*}[ht]
+% \begin{center}
+% \caption{Table of the three most frequent values for each categorical feature for the different demographic subgroups.}
+% \begin{tabular}{ |c|c|c|c|c|c|c| } 
+%     \hline
+%     & & Housing & Saving accounts & Checking account & Purpose & Risk \\ 
+%     \hline
+%     \multirow{3}{4em}{male} 
+%     & mode              & own (517) & little (409) & little (186) & car (243) & good (499)\\ 
+%     & 2nd most frequent & free (89) & moderate (71) & moderate (183) & radio/TV (195) & bad (191)\\ 
+%     & 3rd most frequent & rent (84) & quite rich (47) & rich (43) & furniture/equipment (107) & - \\ 
+%     \hline
+%     \multirow{3}{4em}{female} 
+%     & mode              & own (196) & little (194) & little (88) & car (94) & good(201) \\ 
+%     & 2nd most frequent & rent (95) & moderate (32) & moderate (86) & radio/TV (85) & bad (109) \\
+%     & 3rd most frequent & free (19) & rich (19) & rich (20) & furniture/equipment (74) & - \\ 
+%     \hline
+%     \multirow{3}{4em}{Young} 
+%     & mode              & own (248) & little (242) & little (115) & radio/TV (117) & good(234) \\ 
+%     & 2nd most frequent & rent (113) & moderate (42) & moderate (112) & car (102) & bad (137) \\
+%     & 3rd most frequent & free (10) & quite rich (19) & rich (24) & furniture/equipment (84) & - \\ 
+%     \hline
+%     \multirow{3}{4em}{Young Adults} 
+%     & mode              & own (278) & little (201) & moderate (100) & car (128) & good(264) \\ 
+%     & 2nd most frequent & free (39) & moderate (41) & little (81) & radio/TV (93) & bad (91) \\
+%     & 3rd most frequent & rent (38) & quite rich (24) & rich (18) & furniture/equipment (58) & - \\
+%     \hline 
+%     \multirow{3}{4em}{Senior} 
+%     & mode              & own (143) & little (117) & little (57) & car (79)& good (150)\\
+%     & 2nd most frequent & free (40) & moderate (16) & moderate (39) & radio/TV (51) & bad (53) \\
+%     & 3rd most frequent & rent (20) & quite rich (15) & rich (15) & furniture/equipment (36) & -\\ 
+%     \hline
+%     \multirow{3}{4em}{Elder} 
+%     & mode              & own (44) & little (43) & little (21) & car (28) & good (52) \\ 
+%     & 2nd most frequent & free (19) & rich (5) & moderate (18) & radio/TV (19)& bad (19)\\
+%     & 3rd most frequent & rent (8) & quite rich (5) & rich (6) & business (9) & - \\ 
+%     \hline
+% \end{tabular}
+% \label{table:3}
+% \end{center}
+% \end{table*}
 
-The interesting differences between the different subgroups' statistics that I observe are as follows: there are more than twice as many males than females; the sizes of the `Young' and `Young Adults' subgroups are each larger than the `Senior' and `Elder' subgroups combined; and, `Young Adults' are the only subgroup where the mode of the `Checking account' feature is `moderate', and not `little'. 
-
-\begin{table}[h]
-\begin{center}
-\caption{Table of the percentage of each demographic subgroup where 'Risk' is 'bad'.}
-\begin{tabularx}{0.49\textwidth} { |X|X|X|X|X|X|X| } 
-    \hline
-            & male & female & Young & Young Adults & Senior & Elder \\ 
+\begin{table}[ht]
+    \begin{center}
+    \caption{Table of the three most frequent values for each categorical feature for each demographic subgroup.}
+    \begin{tabular}{ |c|c|c|c|c| } 
         \hline
-        \%bad & 27.7 & 35.2 & 36.9 & 25.6 & 26.1 & 26.8 \\
+        & & Housing & Purpose & Risk \\ 
         \hline
-\end{tabularx}
-\label{table:4}
-\end{center}
+        \multirow{3}{2.5em}{male} 
+        & mode              & own (517) & car (243) & good (499)\\ 
+        & 2nd freq. & free (89) & radio/TV (195) & bad (191)\\ 
+        & 3rd freq. & rent (84) & furniture/equipment (107) & - \\ 
+        \hline
+        \multirow{3}{2.5em}{female} 
+        & mode              & own (196) & car (94) & good(201) \\ 
+        & 2nd freq. & rent (95) & radio/TV (85) & bad (109) \\
+        & 3rd freq. & free (19) & furniture/equipment (74) & - \\ 
+        \hline
+        \multirow{3}{2.5em}{Young} 
+        & mode              & own (248)  & radio/TV (117) & good(234) \\ 
+        & 2nd freq. & rent (113) & car (102) & bad (137) \\
+        & 3rd freq. & free (10)  & furniture/equipment (84) & - \\ 
+        \hline
+        \multirow{3}{2.5em}{Young Adults} 
+        & mode              & own (278) & car (128) & good(264) \\ 
+        & 2nd freq. & free (39) & radio/TV (93) & bad (91) \\
+        & 3rd freq. & rent (38) & furniture/equipment (58) & - \\
+        \hline 
+        \multirow{3}{2.5em}{Senior} 
+        & mode              & own (143) & car (79)& good (150)\\
+        & 2nd freq. & free (40) & radio/TV (51) & bad (53) \\
+        & 3rd freq. & rent (20) & furniture/equipment (36) & -\\ 
+        \hline
+        \multirow{3}{2.5em}{Elder} 
+        & mode              & own (44)  & car (28) & good (52) \\ 
+        & 2nd freq. & free (19) & radio/TV (19)& bad (19)\\
+        & 3rd freq. & rent (8)  & business (9) & - \\ 
+        \hline
+    \end{tabular}
+    \label{table:3}
+    \end{center}
 \end{table}
 
-I have observed bias in both the gender and age demographic groups: a greater proportion of females than males were assigned a 'bad' credit risk; and, a greater proportion of 19-29 year-olds (the `Young' subgroup) were assigned a `bad' credit risk compared to other age groups. This data is presented in Table \ref{table:4}. 
+The interesting differences between the different subgroups' statistics we observe are as follows: there is more than twice as many \emph{male} than \emph{female}; and, the sizes of the \emph{Young} and \emph{Young Adults} subgroups are each larger than the \emph{Senior} and \emph{Elder} subgroups combined.
 
-From our point of view, the reasons why this happened are because there are fewer females than males in the data, and the size of the `Young' subgroup is greater than any of the other age groups, so the data is not representative.
+% ; and, \emph{Young Adults} are the only subgroup where the mode of the \emph{Purpose} feature is \emph{radio/TV} and not \emph{car}. 
+
+By using the demographic parity group fairness metric \cite{DBLP:journals/corr/abs-1710-03184}, we observe there to be bias in both the \emph{Sex} and \emph{Age\_Group} demographic groups: a greater proportion of \emph{female} than \emph{male} was assigned (credit) \emph{Risk} as \emph{bad}; while, a greater proportion of \emph{Young} was assigned (credit) \emph{Risk} as \emph{bad} compared to other age groups. The probability of \emph{bad} predictions for each subgroup is presented in Table \ref{table:4}. 
+
+\begin{table}[ht]
+    \begin{center}
+    \caption{Table of the probability of `Risk' assigned as `bad' for each demographic subgroup during data analysis.}
+    \begin{tabularx}{0.49\textwidth} { |X|X|X|X|X|X|X| } 
+        \hline
+                & male & female & Young & Young Adults & Senior & Elder \\ 
+            \hline
+            \%bad & 27.7 & 35.2 & 36.9 & 25.6 & 26.1 & 26.8 \\
+            \hline
+    \end{tabularx}
+    \label{table:4}
+    \end{center}
+\end{table}
+
+From our point of view, the reason why this bias happened is because there is lower representation of minority subgroups in the dataset, such as \emph{female} or \emph{Elder}, compared to majority subgroups, such as \emph{male} or \emph{Young}.
 
 \subsection{Conventional implementation}
-At this stage of the project, I have a biased dataset. I implement a conventional ML algorithm that is widely used (and is potentially biased) to solve a classification problem --- whether to assign someone a `good' or `bad' credit risk.
+At this stage of the project, we have a biased dataset. We implement a conventional machine learning (ML) algorithm that is widely used, to solve the classification problem of predicting an instance as having \emph{good} or \emph{bad} credit risk.
 
-our chosen algorithm is the support-vector machine (SVM) \cite{Cortes1995}. An SVM is a discriminative classification algorithm which finds the line or curve (in two dimensions) or manifold (in multiple dimensions) that divides classes of data from each other with the maximum margin. In two dimensions, the margin is the width of the separating line or curve, which can be the perpendicular distance to the nearest data point when plotted on a graph.
+The algorithm we choose to implement is the support-vector machine (SVM) \cite{Cortes1995}. An SVM is a discriminative classification algorithm which finds the curve (in two dimensions) or manifold (in multiple dimensions) that divides classes of data from each other with the maximum margin. In two dimensions, the margin is the width of the separating line or curve, which can be the perpendicular distance to the nearest data point when plotted on a graph. The justification for selecting this algorithm is that it is the same conventional ML model used by the suggested paper \cite{Feldman2015ComputationalFP}.
 
-The justification for selecting this algorithm is that it is the same conventional ML model as used in the suggested paper \cite{Feldman2015ComputationalFP}.
-
-our first approach was as follows:
+Our first approach was to do the following:
 \begin{enumerate}
-    \item Naively split the dataset into training and testing sets by randomly sampling some of the data, with $\frac{2}{3}$ for training and $\frac{1}{3}$ for testing (the same ratio used in \cite{Feldman2015ComputationalFP}).
-    \item Standardise numeric features by subtracting the mean and scaling to unit variance by dividing by the standard deviation.
-    \item Encode categorical features using a one-hot scheme, by creating a binary column for each category where 1 denotes an instance of the category and 0 does not. 
-    \item Encode target labels with values 1 for `good' and `0' for `bad'. 
-    \item Exhaustively consider all parameter combinations by grid search to find the best for the SVM with $L_2$ regularisation. 
-    \item Train the model on the training dataset.
-    \item Make sure the model is not over-fitting, by cross-validation.
-    \item See how the model generalises to the testing dataset, by calculating an accuracy score. 
+    \item naively split the dataset into training and testing sets by randomly sampling some of the data, with $\frac{2}{3}$ for training and $\frac{1}{3}$ for testing;
+    \item perform feature scaling on numerical data by standardisation, so the values have zero-mean and unit-variance;
+    \item encode categorical features using a one-hot scheme, and target labels with values 1 for \emph{good} and 0 for \emph{bad};
+    \item exhaustively consider all parameter combinations by grid search to find the best for the SVM with $L_2$ regularisation;
+    \item train the model on the training dataset and make sure the model is not over-fitting by cross-validation; and,
+    \item see how the model generalises to the testing dataset, by calculating an accuracy score. 
 \end{enumerate}
 
-our findings were as follows: the best parameter combination for the classifier was a regularisation parameter ($C$) of value 0.95 and a polynomial kernel function of degree 4; the mean accuracy on the training data was 81.1\%; the mean accuracy after cross-validation was 73.9\%; and, the accuracy on the testing data was 72.5\%.   
+Our findings from the first approach were as follows: the best parameter combination for the classifier was a regularisation parameter $C$ of value 0.75 and a polynomial kernel function of degree 4; the mean accuracy on the training data was 80.2\%; the mean accuracy after cross-validation was 72.4\%; and, the accuracy on the testing data was 69.2\%.   
 
-our next approach was to subsample a new testing dataset in an unbiased way, followed by retraining the model on the training dataset, and then seeing how it generalises to the testing dataset with new conditions. I chose to ensure gender diversity by resampling the data so that the ratio of males to females was 1 to 1. I did this by randomly sampling a subset of the male data, with size equal to the female data, and then discarding the remaining male data. When splitting the dataset into training and testing sets, I applied stratified sampling to preserve the percentage of samples for the male and female classes (i.e. 1 to 1).
+Our second approach was to subsample a new testing dataset in an unbiased way, followed by retraining the model on the training dataset as before, and then seeing how it generalises to the testing dataset with new conditions. We chose to ensure gender diversity by employing uniform sampling \cite{Kamiran2011} based on the expected probabilities to meet demographic parity. By doing so, we made the number of \emph{female} (deprived community) with \emph{good} (positive class) labels (DP), the number of \emph{female} with \emph{bad} (negative class) labels (DN), the number of \emph{male} (favoured community) with \emph{good} labels (FP), and the number of \emph{male} with \emph{bad} labels (FN) all equal. We did this by drawing 109 samples uniformly from each of DP, DN, FP, and FN, respectively --- 109 was the largest size we could use to get an equal number of samples. When splitting this subsampled dataset into training and testing sets, we applied stratified sampling to preserve the expected probabilities.
 
-our new findings were as follows: the best parameter combination for the classifier was a $C$ of value 1 and a polynomial kernel function of degree 3; the mean accuracy on the training data was 78.5\%; the mean accuracy after cross-validation was 68.8\%; and, the accuracy on the testing data was 67.6\%
+Our findings from the second approach were as follows: the best parameter combination for the classifier was a $C$ of value 0.75 and a sigmoid kernel function; the mean accuracy on the training data was 74.8\%; the mean accuracy after cross-validation was 62.1\%; and, the accuracy on the testing data was 55.5\%.
 
-Compared to the previous results, these new results have worse accuracy scores at each stage.
-
-I observed there to be bias towards females. From our point of view, the reason why this bias has happened is because, in the first approach, sex contributed to how the target was classified.
+Compared to the previous results, these new results have worse accuracy scores at each stage. This suggests there was discrimination against the \emph{female} demographic subgroup in the first approach. From our point of view, the reason why this bias has happened is because, in the first approach, the classifier used the \emph{Sex} feature to help classify the target, \emph{Risk}.
 
 \subsection{Fair machine learning implementation}
-In this step, I implement one of the fair ML methods of mitigating bias. I chose only one algorithm to implement: Geometric repair. The justification for this choice is that this seems the easier of the two solutions that were provided in the suggested project paper \cite{Feldman2015ComputationalFP}.
+In this step, we implement one of the fair ML methods of mitigating bias. We chose only one algorithm to implement: Geometric repair. The justification for this choice is that this method of modifying data seems easier to implement than Combinatorial repair, and we are limited on time due to other course commitments.
 
-The proposed algorithm, Geometric repair, is as follows:
+The Geometric repair algorithm is as follows:
 \begin{enumerate}
-    \item Given a biased dataset $D$, with unprotected columns (attributes) $Y$ and stratifying (protected) columns $S$, make all stratified groups (all possible combinations of protected attributes), and let these be the values of $S$.
+    \item Given a biased dataset $D$, with unprotected features $Y$ and stratifying (protected) features $S$, make all stratified groups (all possible combinations of protected features), and let these be the values of $S$.
     \item Store the size of each stratified group; if a group has size 0, ignore it.
     \item Pick a number of quantiles, with the maximum number equal to the size of the smallest stratified group, so that there will be at least one entry per quantile. 
-    \item For each $Y$ column with orderable values, over its unique values, for each stratified group, find the median value at the $1^{st}$ quantile.
-    \item For each $Y$ column, find the median value of the median values, preferring the smaller item in the case of even-length lists, and call this the target value for all values of the column in the $1^{st}$ quantile of each stratified group.
-    \item For each $Y$ column, for each original value in the $1^{st}$ quantile, update the original value to the repair value, $$rv = ((1 - \lambda) * original) + (\lambda * target).$$
+    \item For each $Y$ feature with orderable values, over its unique values, for each stratified group, find the median value at the $1^{st}$ quantile.
+    \item For each $Y$ feature, find the median value of the median values, preferring the smaller item in the case of even-length lists, and call this the target value for all values of the feature in the $1^{st}$ quantile of each stratified group.
+    \item For each $Y$ feature, for each original value in the $1^{st}$ quantile, update the original value to the repair value, $$rv = ((1 - \lambda) * original) + (\lambda * target).$$
     \item Proceed similarly for each remaining quantile.     
 \end{enumerate}
 
-We test the performance of our trained model for the minority groups. Compared with the performance of our model over the majority group, \dots
+% We test the performance of our trained model for the minority groups. Compared with the performance of our model over the majority group, \dots
 
-We observe a reduction in algorithmic bias, which is \dots. We plot the results demonstrating this below:
+Using this algorithm, we generate 11 datasets, for $\lambda = 0.0, 0.1, 0.2, \dots, 1.0$, where $\lambda = 0.0$ is no repair and $\lambda = 1.0$ is a full repair. The $Y$ columns affected by the repair are \emph{Job}, \emph{Credit amount}, and \emph{Duration}. Then, we retrain and test the model for each dataset, by the first approach. We plot results for the accuracy and Disparate Impact (DI) score in Figures \ref{fig:1} and \ref{fig:2}, where $$DI = \frac{Pr \left[ C=+ \mid X=x \right]}{Pr \left[ C=+ \mid X=\bar{x} \right]}$$ as defined in \cite{Feldman2015ComputationalFP}. The lower the DI score is, the fairer the algorithm.
 
-We do get roughly the same results as in the project paper. We justify the reasons by \dots
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.49\textwidth]{accuracy}
+    \caption{Plots of accuracy against values of $\lambda$.}
+    \label{fig:1}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.49\textwidth]{di-score}
+    \caption{Plot of Disparate Impact score against values of $\lambda$.}
+    \label{fig:2}
+\end{figure}
+
+Comparing the performance of the model on the biased dataset ($\lambda = 0$) against the model on the repaired datasets ($\lambda > 0$), we see that accuracy generally decreases as $\lambda$ increases. Also, the DI score is less for every repaired dataset except for $\lambda=0.7$, which may be an outlier. We observe from these results that there is a reduction in algorithm bias in exchange for a reduction in accuracy, and therefore confirm the same observation and claim made by \cite{Feldman2015ComputationalFP}.
 
 \bibliographystyle{plain}
 \bibliography{references}
