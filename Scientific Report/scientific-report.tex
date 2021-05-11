@@ -40,8 +40,7 @@
 In this course project, we will be analysing the human-centric German-Credit dataset for assessing credit risk, which is one of the suggested projects\footnote{kaggle.com/janiobachmann/german-credit-analysis-a-risk-perspective}. We intend to implement one of the two methods of modifying data, called Combinatorial repair
 and Geometric repair, proposed by \cite{Feldman2015ComputationalFP}. The motivation for this project is to assess the paper's claim that the repair performs favourably in terms of training classifiers that are both accurate and unbiased.
 
-We believe the intention suits this submodule as bias in artificial intelligence because we will be developing a fair machine learning ecosystem
-to detect, reduce, and eventually mitigate different types of bias that may exist in the final outcome of the algorithm in various ways. The concrete tasks we plan to do are as follows:
+We believe the intention suits this submodule as bias in artificial intelligence (AI) because we will be developing a fair machine learning (ML) ecosystem to detect, reduce, and eventually mitigate different types of bias that may exist in the final outcome of the algorithm in various ways. The concrete tasks we plan to do are as follows:
 \begin{enumerate}
     \item perform any `cleaning', binning, or discrete-to-continuous feature transformations on the dataset;
     \item split the dataset into different demographic groups, and compute and report information for each feature for each demographic subgroup;
@@ -49,35 +48,32 @@ to detect, reduce, and eventually mitigate different types of bias that may exis
     \item choose a conventional algorithm to implement on the biased dataset, and describe the algorithm and the justification for selection;
     \item naively split the dataset into training and testing sets, then train the model and see how it generalises to the testing dataset, as well as explain our approach and findings;
     \item subsample a new testing dataset in an unbiased way, then retrain the model and see how it generalises to these new testing conditions; 
-    \item compare our findings with the previous results and explain our approach;
-    \item describe any sort of bias we observed, and explain the reasons why this bias has happened from our point of view;
-    \item implement one of Combinatorial repair or Geometric repair, and describe the algorithm;
-    \item test the performance of the trained model for the repaired datasets, compare it with the performance of the model over the unrepaired dataset, and describe any reduction in algorithmic bias we observe;
-    \item state whether we get roughly the same results as the project paper, and, if not, reconsider our code or justify the reasons; and,
-    \item describe from our point of view any sort of reduction in accuracy we observe.
+    \item compare our findings with the previous results and explain our approach, as well as describe any sort of bias we observed and explain the reasons why this bias has happened from our point of view;
+    \item implement one of Combinatorial repair or Geometric repair and describe the algorithm, then test the performance of the model for the repaired datasets, compare it with the performance of the model over the unrepaired dataset, and describe any reduction in algorithmic bias we observe; and,
+    \item state whether we get roughly the same results as the project paper and justify the reasons, and describe from our point of view any sort of reduction in accuracy we observe.
 \end{enumerate}
 The final work product of these tasks will be appropriate and proper plots and graphs that demonstrate any reduction in algorithmic bias and any sort of reduction in accuracy we observe after the fair machine learning implementation.
 
-As we formulate this project, the particular context we are thinking about is applying for credit loans. The dataset might exhibit a greater proportion of good risk for applicants from specific demographic groups (such as age groups) over another. Biases such as this, termed \emph{disparate impact}, should be avoided by classifiers, as it is unethical and prohibited by law \cite{10.2307/24758720}.  
+As we formulate this project, the particular context we are thinking about is applying for credit loans. The dataset might exhibit a greater proportion of good risk for applicants from specific demographic groups (such as age groups) over another. Biases such as this, termed \emph{disparate impact}, should be avoided by classifiers, as it is unethical and unlawful \cite{10.2307/24758720}.  
 
-The technologies we plan to use in our implementation are the Python programming language, the Pandas package for data analysis, and the Scikit-learn package for the implementation of the artificial intelligence (AI) algorithm.
+The technologies we plan to use in our implementation are the Python programming language, the Pandas package for data analysis, and the Scikit-learn package for the implementation of the AI algorithm.
 
 \section{Project progress report}
 \subsection{Data analysis}
-Out of `cleaning', binning, or discrete-to-continuous feature transformations we did on the dataset, we did `cleaning' and binning. We did `cleaning' by dropping the \emph{Checking account} and \emph{Saving accounts} features because they had instances with missing values. And, we did binning by replacing the \emph{Age} feature, which has integer values, with the \emph{Age\_Group} feature, which has categorical values. The four categorical values of \emph{Age\_Group} and the range of integer values, inclusive, of \emph{Age} that they correspond to are as follows: \textit{Young}, 19-29; \textit{Young Adults}, 30-40; \textit{Senior}, 41-55; \textit{Elder}, 55+.
+Out of `cleaning', binning, or discrete-to-continuous feature transformations we did on the dataset, we did `cleaning' and binning. We did `cleaning' by dropping the \emph{Checking account} and \emph{Saving accounts} features because they had instances with missing values. And, we did binning by replacing the \emph{Age} feature, which has integer values, with the \emph{Age\_Group} feature, which has categorical values. The four categorical values of \emph{Age\_Group} and the range of integer values, inclusive, of \emph{Age} that they correspond to are as follows: \textit{Young}, 19-29; \textit{Young Adults}, 30-40; \textit{Senior}, 41-55; and, \textit{Elder}, 55+.
 
 Then, we split the dataset into different demographic groups by writing down the size of the groups, the average value for each numeric feature, the variance of each numeric feature, the mode for each categorical feature, and the three most frequent values for each categorical feature, each computed on the different demographic subgroups. The two different demographic groups are \emph{Age\_Group} and \emph{Sex}, and their different demographic subgroups, respectively, are \textit{Young}, \textit{Young Adults}, \textit{Senior}, or \textit{Elder}, and \emph{male} or \emph{female}. The different subgroups' statistics are presented in Tables \ref{table:1}, \ref{table:2}, and \ref{table:3}.
 
 \begin{table}[ht]
 \begin{center}
 \caption{Table of the size of each demographic subgroup.}
-\begin{tabularx}{0.49\textwidth} { |X|X|X|X|X|X|X| } 
+\begin{tabular}{ |c|c|c|c|c|c|c| } 
     \hline
             & male & female & Young & Young Adults & Senior & Elder \\ 
         \hline
         Size & 690  & 310    & 371   & 355          & 203    & 71    \\
         \hline
-\end{tabularx}
+\end{tabular}
 \label{table:1}
 \end{center}
 \end{table}
@@ -163,39 +159,39 @@ Then, we split the dataset into different demographic groups by writing down the
 \begin{table}[ht]
     \begin{center}
     \caption{Table of the three most frequent values for each categorical feature for each demographic subgroup.}
-    \begin{tabular}{ |c|c|c|c|c| } 
+    \begin{tabular}{|c|c|c|c|c|} 
         \hline
         & & Housing & Purpose & Risk \\ 
         \hline
-        \multirow{3}{2.5em}{male} 
+        \multirow{3}{*}{male} 
         & mode              & own (517) & car (243) & good (499)\\ 
-        & 2nd freq. & free (89) & radio/TV (195) & bad (191)\\ 
-        & 3rd freq. & rent (84) & furniture/equipment (107) & - \\ 
+        & 2nd & free (89) & radio/TV (195) & bad (191)\\ 
+        & 3rd & rent (84) & furniture/equipment (107) & - \\ 
         \hline
-        \multirow{3}{2.5em}{female} 
+        \multirow{3}{*}{female} 
         & mode              & own (196) & car (94) & good(201) \\ 
-        & 2nd freq. & rent (95) & radio/TV (85) & bad (109) \\
-        & 3rd freq. & free (19) & furniture/equipment (74) & - \\ 
+        & 2nd & rent (95) & radio/TV (85) & bad (109) \\
+        & 3rd & free (19) & furniture/equipment (74) & - \\ 
         \hline
-        \multirow{3}{2.5em}{Young} 
+        \multirow{3}{*}{Young} 
         & mode              & own (248)  & radio/TV (117) & good(234) \\ 
-        & 2nd freq. & rent (113) & car (102) & bad (137) \\
-        & 3rd freq. & free (10)  & furniture/equipment (84) & - \\ 
+        & 2nd & rent (113) & car (102) & bad (137) \\
+        & 3rd & free (10)  & furniture/equipment (84) & - \\ 
         \hline
-        \multirow{3}{2.5em}{Young Adults} 
+        \multirow{3}{2em}{Young Adults} 
         & mode              & own (278) & car (128) & good(264) \\ 
-        & 2nd freq. & free (39) & radio/TV (93) & bad (91) \\
-        & 3rd freq. & rent (38) & furniture/equipment (58) & - \\
+        & 2nd & free (39) & radio/TV (93) & bad (91) \\
+        & 3rd & rent (38) & furniture/equipment (58) & - \\
         \hline 
-        \multirow{3}{2.5em}{Senior} 
+        \multirow{3}{*}{Senior} 
         & mode              & own (143) & car (79)& good (150)\\
-        & 2nd freq. & free (40) & radio/TV (51) & bad (53) \\
-        & 3rd freq. & rent (20) & furniture/equipment (36) & -\\ 
+        & 2nd & free (40) & radio/TV (51) & bad (53) \\
+        & 3rd & rent (20) & furniture/equipment (36) & -\\ 
         \hline
-        \multirow{3}{2.5em}{Elder} 
+        \multirow{3}{*}{Elder} 
         & mode              & own (44)  & car (28) & good (52) \\ 
-        & 2nd freq. & free (19) & radio/TV (19)& bad (19)\\
-        & 3rd freq. & rent (8)  & business (9) & - \\ 
+        & 2nd & free (19) & radio/TV (19)& bad (19)\\
+        & 3rd & rent (8)  & business (9) & - \\ 
         \hline
     \end{tabular}
     \label{table:3}
@@ -211,13 +207,13 @@ By using the demographic parity group fairness metric \cite{DBLP:journals/corr/a
 \begin{table}[ht]
     \begin{center}
     \caption{Table of the probability of `Risk' assigned as `bad' for each demographic subgroup during data analysis.}
-    \begin{tabularx}{0.49\textwidth} { |X|X|X|X|X|X|X| } 
+    \begin{tabular}{ |c|c|c|c|c|c|c| } 
         \hline
                 & male & female & Young & Young Adults & Senior & Elder \\ 
             \hline
             \%bad & 27.7 & 35.2 & 36.9 & 25.6 & 26.1 & 26.8 \\
             \hline
-    \end{tabularx}
+    \end{tabular}
     \label{table:4}
     \end{center}
 \end{table}
@@ -225,16 +221,16 @@ By using the demographic parity group fairness metric \cite{DBLP:journals/corr/a
 From our point of view, the reason why this bias happened is because there is lower representation of minority subgroups in the dataset, such as \emph{female} or \emph{Elder}, compared to majority subgroups, such as \emph{male} or \emph{Young}.
 
 \subsection{Conventional implementation}
-At this stage of the project, we have a biased dataset. We implement a conventional machine learning (ML) algorithm that is widely used, to solve the classification problem of predicting an instance as having \emph{good} or \emph{bad} credit risk.
+At this stage of the project, we have a biased dataset. We implement a conventional ML algorithm that is widely used, to solve the classification problem of predicting an instance as having \emph{good} or \emph{bad} credit risk.
 
-The algorithm we choose to implement is the support-vector machine (SVM) \cite{Cortes1995}. An SVM is a discriminative classification algorithm which finds the curve (in two dimensions) or manifold (in multiple dimensions) that divides classes of data from each other with the maximum margin. In two dimensions, the margin is the width of the separating line or curve, which can be the perpendicular distance to the nearest data point when plotted on a graph. The justification for selecting this algorithm is that it is the same conventional ML model used by the suggested paper \cite{Feldman2015ComputationalFP}.
+The algorithm we choose to implement is the support-vector machine (SVM) \cite{Cortes1995}. An SVM is a classification algorithm which finds the curve (in two dimensions) or manifold (in multiple dimensions) that divides classes of data from each other with the maximum margin. In two dimensions, the margin is the width of the separating line or curve, which can be the perpendicular distance to the nearest data point when plotted on a graph. The justification for selecting this algorithm is that it is the same conventional ML model used by the suggested paper \cite{Feldman2015ComputationalFP}.
 
 Our first approach was to do the following:
 \begin{enumerate}
     \item naively split the dataset into training and testing sets by randomly sampling some of the data, with $\frac{2}{3}$ for training and $\frac{1}{3}$ for testing;
     \item perform feature scaling on numerical data by standardisation, so the values have zero-mean and unit-variance;
     \item encode categorical features using a one-hot scheme, and target labels with values 1 for \emph{good} and 0 for \emph{bad};
-    \item exhaustively consider all parameter combinations by grid search to find the best for the SVM with $L_2$ regularisation;
+    \item consider different parameter combinations to find the best for the SVM with $L_2$ regularisation;
     \item train the model on the training dataset and make sure the model is not over-fitting by cross-validation; and,
     \item see how the model generalises to the testing dataset, by calculating an accuracy score. 
 \end{enumerate}
@@ -256,30 +252,30 @@ The Geometric repair algorithm is as follows:
     \item Store the size of each stratified group; if a group has size 0, ignore it.
     \item Pick a number of quantiles, with the maximum number equal to the size of the smallest stratified group, so that there will be at least one entry per quantile. 
     \item For each $Y$ feature with orderable values, over its unique values, for each stratified group, find the median value at the $1^{st}$ quantile.
-    \item For each $Y$ feature, find the median value of the median values, preferring the smaller item in the case of even-length lists, and call this the target value for all values of the feature in the $1^{st}$ quantile of each stratified group.
-    \item For each $Y$ feature, for each original value in the $1^{st}$ quantile, update the original value to the repair value, $$rv = ((1 - \lambda) * original) + (\lambda * target).$$
+    \item For each $Y$ feature, find the median value of the median values, preferring the smaller item in the case of even-length lists, and call this the \emph{target} value for all values of the feature in the $1^{st}$ quantile of each stratified group.
+    \item For each $Y$ feature, for each \emph{original} value in the $1^{st}$ quantile, update the original value to the repair value $$rv = ((1 - \lambda) * original) + (\lambda * target),$$ where $\lambda$ is the repair amount we set. 
     \item Proceed similarly for each remaining quantile.     
 \end{enumerate}
 
 % We test the performance of our trained model for the minority groups. Compared with the performance of our model over the majority group, \dots
 
-Using this algorithm, we generate 11 datasets, for $\lambda = 0.0, 0.1, 0.2, \dots, 1.0$, where $\lambda = 0.0$ is no repair and $\lambda = 1.0$ is a full repair. The $Y$ columns affected by the repair are \emph{Job}, \emph{Credit amount}, and \emph{Duration}. Then, we retrain and test the model for each dataset, by the first approach. We plot results for the accuracy and Disparate Impact (DI) score in Figures \ref{fig:1} and \ref{fig:2}, where $$DI = \frac{Pr \left[ C=+ \mid X=x \right]}{Pr \left[ C=+ \mid X=\bar{x} \right]}$$ as defined in \cite{Feldman2015ComputationalFP}. The lower the DI score is, the fairer the algorithm.
+Using this algorithm, we generate 11 datasets, for $\lambda = 0.0, 0.1, 0.2, \dots, 1.0$, where $\lambda = 0.0$ gives no repair, $\lambda = 1.0$ gives a full repair, and any value of $\lambda$ in between gives a partial repair. We chose to stratify by \emph{Sex}, so that \emph{Age\_group} was a protected feature and \emph{Sex} was a protected stratifying feature. The stratified groups were \emph{male-Young}, \emph{female-Young}, \emph{male-Elder}, \emph{female-Elder}, and so on. The $Y$ features with orderable values affected by the repair were \emph{Job}, \emph{Credit amount}, and \emph{Duration}. Then, we retrain and test the model for each dataset, by the first approach. We plot results for the accuracy and Disparate Impact (DI) score in Figures \ref{fig:1} and \ref{fig:2}, with $$DI = \frac{Pr \left[ C=+ \mid X=x \right]}{Pr \left[ C=+ \mid X=\bar{x} \right]},$$ where $+$ is a good outcome of class $C$ and $\bar{x}$ is a privileged group of protected attribute $X$, as defined in \cite{Feldman2015ComputationalFP}. In our case, $+$ is \emph{good}, $C$ is \emph{Risk}, $X$ is $Sex$, $x$ is \emph{female}, and $\bar{x}$ is \emph{male}. The lower the DI score is, the fairer the algorithm.
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=0.49\textwidth]{accuracy}
+    \includegraphics[width=0.48\textwidth]{accuracy}
     \caption{Plots of accuracy against values of $\lambda$.}
     \label{fig:1}
 \end{figure}
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=0.49\textwidth]{di-score}
+    \includegraphics[width=0.48\textwidth]{di-score}
     \caption{Plot of Disparate Impact score against values of $\lambda$.}
     \label{fig:2}
 \end{figure}
 
-Comparing the performance of the model on the biased dataset ($\lambda = 0$) against the model on the repaired datasets ($\lambda > 0$), we see that accuracy generally decreases as $\lambda$ increases. Also, the DI score is less for every repaired dataset except for $\lambda=0.7$, which may be an outlier. We observe from these results that there is a reduction in algorithm bias in exchange for a reduction in accuracy, and therefore confirm the same observation and claim made by \cite{Feldman2015ComputationalFP}.
+Comparing the performance of the model on the biased dataset ($\lambda = 0$) against the model on the repaired datasets ($\lambda > 0$), we see that accuracy generally decreases as $\lambda$ increases. Also, the DI score is less for every repaired dataset except for $\lambda=0.7$, which may be an outlier. We observe from these results that there is a reduction in algorithm bias in exchange for a reduction in accuracy, which is the same observation made by \cite{Feldman2015ComputationalFP}. Therefore, we confirm the paper's claim that the repair performs favourably.
 
 \bibliographystyle{plain}
 \bibliography{references}
