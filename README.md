@@ -31,7 +31,7 @@ Find a human-centric dataset which is publicly available with demographic inform
 
 3. If you have observed any sort of bias, please describe it and explain the reasons why this bias has happened from your point of view.
 
-### Task 3 - Conventional implementation
+### Task 3 - Conventional Implementation
 
 At this stage of the project, you have a biased dataset. Now, implement a conventional ML algorithm that suits the project description. For instance, if you have chosen to solve a classification problem in your project proposal, implement a classification algorithm that is widely used (and is potentially biased).
 
@@ -45,7 +45,7 @@ At this stage of the project, you have a biased dataset. Now, implement a conven
 
 5. If you have observed any sort of bias, please describe it and explain the reasons why this bias has happened from your point of view.
 
-### Task 4 - fair machine learning implementation
+### Task 4 - Fair Machine Learning Implementation
 
 Implement one of the fair ML methods of mitigating bias in the scope of your selected project (if you choose only one algorithm to implement, you should justify your choice). Use the solutions that were provided in the suggested projects papers. Now, follow these steps:
 
